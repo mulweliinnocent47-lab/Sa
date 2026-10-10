@@ -57,13 +57,13 @@ export function SignInPrompt({ open, reason = "download", onClose }) {
         <p className="mt-2 text-sm text-muted-foreground">{body}</p>
         <div className="mt-5 flex flex-col gap-2">
           <Link
-            href={`/sign-up?next=${next}`}
+            href={`/signup?next=${next}`}
             className="inline-flex h-10 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground"
           >
             Create free account
           </Link>
           <Link
-            href={`/log-in?next=${next}`}
+            href={`/login?next=${next}`}
             className="inline-flex h-10 items-center justify-center rounded-lg border border-input px-4 text-sm font-medium"
           >
             Log in

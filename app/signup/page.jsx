@@ -1,6 +1,6 @@
 "use client"
 
-import "./sign-up.css"
+import { AppShell } from "@/components/AppShell"
 import Input from "@/components2/input.jsx"
 import Button from "@/components2/button.jsx"
 import Link from "next/link"
@@ -31,16 +31,17 @@ export default function Signup() {
         return
       }
       alert("Account created — please log in.")
-      router.push(`/log-in${window.location.search}`)
+      router.push(`/login${window.location.search}`)
     }
   
   
 
   return (
-    <div className="auth-page">
-      <form onSubmit={handleSingUp} className="auth-form">
-        <h1>Create your account</h1>
-        <p className="auth-subtitle">Join SA Student — it's free.</p>
+    <AppShell>
+    <div className="flex justify-center py-6 md:py-12">
+      <form onSubmit={handleSingUp} className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-lg md:p-8">
+        <h1 className="text-center text-2xl font-bold tracking-tight">Create your account</h1>
+        <p className="mb-6 mt-1 text-center text-sm text-muted-foreground">Join SA Student — it's free.</p>
 
         <Input must={true} logic={ (e) => {setName(e.target.value)}} pro="Username" id="name" type="text" value="Enter your username" />
         <Input must={true}  logic={ (e) => {setEmail(e.target.value)}}  pro="Email" id="email" type="email" value="Enter your email" />
@@ -49,13 +50,14 @@ export default function Signup() {
 
         <Button info="Sign up"  type="submit" />
 
-        <div className="login">
-          <p>
+        <div className="flex justify-center">
+          <p className="text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href={`/log-in${typeof window !== "undefined" ? window.location.search : ""}`} className="login-link">Log in</Link>
+            <Link href={`/login${typeof window !== "undefined" ? window.location.search : ""}`} className="font-semibold text-primary underline">Log in</Link>
           </p>
         </div>
       </form>
     </div>
+    </AppShell>
   )
 }
