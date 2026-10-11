@@ -81,9 +81,17 @@ export function ProgressBar({ value = 0, tone = "primary" }) {
   );
 }
 
-export function Chip({ active, children }) {
+
+export function Chip({ active, children, className = "", ...props }) {
   return (
-    <button type="button" className={`h-9 shrink-0 rounded-full border px-4 text-sm font-medium transition-colors ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-muted-foreground hover:bg-muted"}`}>
+    <button
+      type="button"
+      aria-pressed={!!active}
+      {...props}
+      className={`h-9 shrink-0 rounded-full border px-4 text-sm font-medium transition-colors ${
+        active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-muted-foreground hover:bg-muted"
+      } ${className}`}
+    >
       {children}
     </button>
   );

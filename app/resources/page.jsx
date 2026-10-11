@@ -6,7 +6,7 @@ import { Badge, Card, Chip, ChipRow, IconBox, PageHeader, SearchBar } from "@/co
 export const metadata = { title: "Resources — SA Student" };
 
 // ── PLACEHOLDER DATA ── replace with notes / papers / memos from your backend
-const FILTERS = ["All", "Notes", "Past papers", "Memos", "Videos"];
+const FILTERS = ["All", "Notes", "Papers", "Memos", "Videos"];
 const TYPE = {
   Notes: { icon: BookOpen, tone: "brand" },
   "Past paper": { icon: FileText, tone: "gold" },
@@ -21,13 +21,13 @@ const RESOURCES = [
   { slug: "essay-structure", title: "Essay structure cheat-sheet", type: "Notes", subject: "English HL", grade: 11, meta: "5 min read", pro: true },
   { slug: "history-cold-war", title: "The Cold War timeline", type: "Notes", subject: "History", grade: 12, meta: "10 min read", pro: false },
 ];
-
+  
 export default function ResourcesPage() {
   return (
     <AppShell>
       <PageHeader title="Resources" subtitle="Notes, past papers, memos and videos in one place." />
       <SearchBar placeholder="Search resources" />
-      <div className="mt-3"><ChipRow>{FILTERS.map((f, i) => <Chip key={f} active={i === 0}>{f}</Chip>)}</ChipRow></div>
+      <div className="mt-3"><ChipRow>{FILTERS.map((f, i) => <Chip key={f}  active={i === 0}><Link key={i} href={f === "All" ? "#" : f.toLowerCase()}>{f}</Link></Chip>)}</ChipRow></div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {RESOURCES.map((r) => {
