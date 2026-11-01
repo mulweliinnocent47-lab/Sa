@@ -55,52 +55,76 @@ export function DesktopNav() {
 }
 
 export function AuthLinks() {
-const [user, setUser] = useState("")
-useEffect(() => {
-  fetch("/api/auth/me")
-    .then(res => res.json())
-    .then(data => {
-      if (data.authenticated) {
-        setUser(data.user);
-      }
-    });
-}, []);
+  const [user, setUser] = useState(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function getUser() {
+      try {
+        const res = await fetch("/api/auth/me", {
+          method: "GET",
+          credentials: "include",
+          cache: "no-store",
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch user");
+        }
+
+        const data = await res.json();
+
+        if (mounted && data.authenticated) {
+          setUser(data.user);
+        }
+      } catch (error) {
+        console.error("Authentication error:", error);
+      }
+    }
+
+    getUser();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
-  <div className="ml-auto flex items-center gap-2 lg:ml-3">
+    <div className="ml-auto flex items-center gap-2 lg:ml-3">
 
-    {user ? (
-      <Link href="/logout">
-        Log out
-      </Link>
-    ) : (
-      AUTH_ROUTES
-        .filter(route => route.href !== "/logout")
-        .map(({ href, label }) => {
-          const on = isActivePath(pathname, href);
-          const primary = href === "/signup";
+      {user ? (
+        <Link href="/logout">
+          Log out
+        </Link>
+      ) : (
+        AUTH_ROUTES
+          .filter(route => route.href !== "/logout")
+          .map(({ href, label }) => {
+            const on = isActivePath(pathname, href);
+            const primary = href === "/signup";
 
-          return (
-            <Link
-              key={href}
-              href={href}
-              aria-current={on ? "page" : undefined}
-              className={`inline-flex h-9 items-center rounded-lg px-3 text-sm font-medium transition-colors ${
-                on
-                  ? "bg-primary text-primary-foreground ring-2 ring-primary/30"
-                  : primary
-                  ? "border border-primary text-primary hover:bg-brand-soft"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              }`}
-            >
-              {label}
-            </Link>
-          );
-        })
-    )}
+            return (
+              <Link
+                key={href}
+                href={href}
+                aria-current={on ? "page" : undefined}
+                className={`inline-flex h-9 items-center rounded-lg px-3 text-sm font-medium transition-colors ${
+                  on
+                    ? "bg-primary text-primary-foreground ring-2 ring-primary/30"
+                    : primary
+                    ? "border border-primary text-primary hover:bg-brand-soft"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })
+      )}
 
-  </div>
-);
+    </div>
+  );
 }
 
 const BOTTOM = ["/", "/subjects", "/resources", "/ai-tutor"];
