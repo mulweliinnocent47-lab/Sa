@@ -94,7 +94,21 @@ return totalDownloads
       <section className="mt-8">
         <div className="flex items-end justify-between"><h2 className="text-lg font-bold tracking-tight">Short notes for tonight</h2><Link href="/notes" className="text-sm font-medium text-primary">All notes</Link></div>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
-          {NOTES.slice(0,2).map((n)=><Link key={n.slug} href={`/notes/${encodeURIComponent(n.slug)}`} className="rounded-2xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-soft"><BookOpen className="size-5 text-cyan" /><p className="mt-3 font-semibold">{n.title}</p><p className="mt-1 text-sm text-muted-foreground">{n.summary}</p><p className="mt-3 text-xs text-muted-foreground">{n.minutes} min read</p></Link>)}
+        {[...NOTES]
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 2)
+  .map((n) => (
+    <Link
+      key={n.slug}
+      href={`/notes/${encodeURIComponent(n.slug)}`}
+      className="rounded-2xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-soft"
+    >
+      <BookOpen className="size-5 text-cyan" />
+      <p className="mt-3 font-semibold">{n.title}</p>
+      <p className="mt-1 text-sm text-muted-foreground">{n.summary}</p>
+      <p className="mt-3 text-xs text-muted-foreground">{n.minutes} min read</p>
+    </Link>
+  ))}
         </div>
       </section>
     </AppShell>
