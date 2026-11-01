@@ -70,7 +70,7 @@ return totalDownloads
         <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
           <div className="flex items-center justify-between text-sm font-semibold"><span className="flex items-center gap-2"><Download className="size-4 text-primary" /> Downloads this month</span><span className="text-muted-foreground">{downloadsUsed}/{FREE_DOWNLOAD_LIMIT}</span></div>
           <div className="mt-4 h-2 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-primary" style={{width:`${(downloadsUsed/FREE_DOWNLOAD_LIMIT)*100}%`}} /></div>
-          <p className="mt-3 text-xs text-muted-foreground">{FREE_DOWNLOAD_LIMIT - downloadsUsed?} left on Free. Go (R49) makes it unlimited.</p>
+          <p className="mt-3 text-xs text-muted-foreground">{FREE_DOWNLOAD_LIMIT - downloadsUsed} left on Free. Go (R49) makes it unlimited.</p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
           <div className="flex items-center gap-2 text-sm font-semibold"><Lock className="size-4 text-gold" /> What Free unlocks</div>
