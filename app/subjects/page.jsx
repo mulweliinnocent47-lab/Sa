@@ -1,4 +1,4 @@
-<script>
+
 import Link from "next/link";
 import {
   Calculator,
