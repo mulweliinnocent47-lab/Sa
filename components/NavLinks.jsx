@@ -94,7 +94,7 @@ export function AuthLinks() {
     <div className="ml-auto flex items-center gap-2 lg:ml-3">
 
       {user ? (
-        <Link href="/logout">
+        <Link href="/logout" prefetch={false}>
           Log out
         </Link>
       ) : (
