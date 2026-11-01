@@ -15,6 +15,7 @@ export const metadata = {
 export default async function Dashboard() {
 
 async function handleDownloads(){
+  const supabase = await createClient();
 const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -23,8 +24,6 @@ const {
     const totalDownloads = 0
       return totalDownloads
     }
-    
-const supabase = await createClient();
 
 const { data, error } = await supabase
   .from("downloads")
