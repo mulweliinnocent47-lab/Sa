@@ -48,7 +48,7 @@ const getServerSubject = cache(async () => {
         .replace(/-/g, " ")
         .toUpperCase(),
       tone: "brand",
-      papers: allFile.length,
+      papers: allFiles.length,
       notes: "20+",
       grade,
       progress: 0,
