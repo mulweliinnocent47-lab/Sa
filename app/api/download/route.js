@@ -1,0 +1,84 @@
+
+ import { NextResponse } from "next/server";
+import { createClient } from "@/utils/supabase/server";
+
+export const dynamic = "force-dynamic";
+
+const BUCKET = "SA PDF";
+
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+
+    const path = searchParams.get("path");
+    // Strip characters that could break out of the header value
+    const filename = (
+      searchParams.get("filename") || "studyhub-paper.pdf"
+    ).replace(/[\r\n"\\]/g, "_");
+
+    if (!path || path.includes("..")) {
+      return NextResponse.json(
+        { error: "Missing file path" },
+        { status: 400 }
+      );
+    }
+
+    const supabase = await createClient();
+
+    // Only logged-in users can download papers
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { data, error } = await supabase.storage
+      .from(BUCKET)
+      .download(path);
+
+    if (error) {
+      console.error("Supabase download error:", error);
+
+      return NextResponse.json(
+        {
+          error: "Failed to download file",
+          details: error.message,
+        },
+        { status: 500 }
+      );
+    }
+
+    const arrayBuffer = await data.arrayBuffer();
+
+    return new NextResponse(arrayBuffer, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `attachment; filename="${filename}"`,
+        "Content-Length": String(arrayBuffer.byteLength),
+        "Cache-Control": "no-store",
+      },
+    });
+  } catch (error) {
+    console.error("Download route error:", error);
+
+    return NextResponse.json(
+      {
+        error: "Download failed",
+        details:
+          error instanceof Error
+            ? error.message
+            : String(error),
+      },
+      { status: 500 }
+    );
+  }
+  await supabase
+  .from("downloads")
+  .insert({
+    user_id: user.id,
+    file_name: filename
+  });
+}
