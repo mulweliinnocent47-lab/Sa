@@ -40,7 +40,7 @@ return totalDownloads
 }
 
   const days = daysUntil(NSC_START);
-  const downloadsUsed = handleDownloads();
+  const downloadsUsed = await handleDownloads();
   const recent = PAPERS.slice(0, 3);
   const NOTES = await getNotes();
   if (!NOTES) {
