@@ -11,7 +11,7 @@ export const metadata = {
   title: "SA Study — NSC past papers, notes & AI practice",
   description: "Track your exam countdown, open NSC past papers and notes, and brainstorm with an AI study partner built for South African high schoolers.",
 };
-
+export const dynamic = "force-dynamic";
 export default async function Dashboard() {
 
 async function handleDownloads(){
