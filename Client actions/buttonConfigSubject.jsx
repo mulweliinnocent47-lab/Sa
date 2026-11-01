@@ -4,11 +4,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Chip, ChipRow } from "@/components/ui";
 
 const TABS = ["Overview", "Notes", "Papers"];
-const GRADES = ["7", "8", "9", "10", "11", "12"];
+const GRADES = ["12"];
 
 export  function Button() {
   const router = useRouter();
-  const current = useSearchParams().get("grade") ?? "10"; // default: Grade 10
+  const current = useSearchParams().get("grade") ?? "12"; // default: Grade 10
 
   return (
     <ChipRow>
