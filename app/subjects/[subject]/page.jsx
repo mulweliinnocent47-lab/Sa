@@ -358,10 +358,7 @@ const getServerSubject = cache(async (slug, grade) => {
     .filter((file) => {
       const folder = String(file.folder ?? "");
 
-      const fileSlug = folder
-        .replace(/^grade-\d+-/i, "")
-        .toLowerCase()
-        .replace(/\s+/g, "-");
+      const fileSlug = folder.split("/")[0].replace(/^grade-\d+-/i, "").toLowerCase().replace(/\s+/g, "-");
 
       const fileGrade = folder.match(/^grade-(\d+)-/i)?.[1];
 
@@ -372,10 +369,7 @@ const getServerSubject = cache(async (slug, grade) => {
     })
     .map((file) => ({
       ...file,
-      slug: String(file.folder ?? "")
-        .replace(/^grade-\d+-/i, "")
-        .toLowerCase()
-        .replace(/\s+/g, "-"),
+      slug: String(file.folder ?? "").split("/")[0].replace(/^grade-\d+-/i, "").toLowerCase().replace(/\s+/g, "-"),
       name: String(file.name ?? "Untitled").replace(/\.txt$/i, ""),
       grade: String(file.folder ?? "").match(/^grade-(\d+)-/i)?.[1],
     }));
