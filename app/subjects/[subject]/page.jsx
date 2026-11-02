@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { redirect } from "next/navigation"
+
 import {
   BookOpen,
   ClipboardCheck,
@@ -80,6 +80,8 @@ export default async function SubjectPage({ params, searchParams }) {
   const papersHref =
     `/papers?subject=${encodeURIComponent(subject)}` +
     `&grade=${encodeURIComponent(prop)}`;
+  const notesHref =
+    `/notes`;
 
   const resourcesHref =
     `/resources?subject=${encodeURIComponent(subject)}` +
@@ -143,7 +145,12 @@ export default async function SubjectPage({ params, searchParams }) {
               {notes.map((note, index) => (
                 <Card
                   key={`${note.folder}-${note.name}-${index}`}
-                 
+                  <Link
+                  key={paper.id}
+                  href={notesHref}
+                  className="block"
+                >
+                  onClick= {() => redirect("/notes") }
                   className="flex items-center gap-3 !p-4"
                 >
                   <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">
@@ -151,7 +158,7 @@ export default async function SubjectPage({ params, searchParams }) {
                   </span>
        
                   <div className="min-w-0 flex-1">
-                    onClick= {() => redirect("/notes") }
+                   
                     <p className="text-sm font-semibold">
                       {note.name}
                     </p>
