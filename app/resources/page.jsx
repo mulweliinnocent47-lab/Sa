@@ -6,7 +6,7 @@ import { Badge, Card, Chip, ChipRow, IconBox, PageHeader, SearchBar } from "@/co
 export const metadata = { title: "Resources — SA Student" };
 
 // ── PLACEHOLDER DATA ── replace with notes / papers / memos from your backend
-const FILTERS = ["All", "Notes", "Papers", "Memos", "Videos"];
+const FILTERS = ["All", "Notes", "Papers", "Memo", "Video"];
 const TYPE = {
   Notes: { icon: BookOpen, tone: "brand" },
   "Past paper": { icon: FileText, tone: "gold" },
