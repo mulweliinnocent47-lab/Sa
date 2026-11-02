@@ -238,7 +238,7 @@ export default async function SubjectPage({ params, searchParams }) {
 
                 return (
                   <Link key={topic.name}
-                      href={`/exam-centre`}
+                      href={`/exam-centre?${topic.name}`}
                       className="block"
                     >
                   <Card
