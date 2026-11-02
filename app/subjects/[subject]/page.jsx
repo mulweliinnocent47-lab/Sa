@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation"
 import {
   BookOpen,
   ClipboardCheck,
@@ -142,7 +143,7 @@ export default async function SubjectPage({ params, searchParams }) {
               {notes.map((note, index) => (
                 <Card
                   key={`${note.folder}-${note.name}-${index}`}
-                  onClick={() => href=`/notes/${note.name}`)
+                 
                   className="flex items-center gap-3 !p-4"
                 >
                   <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">
@@ -150,10 +151,11 @@ export default async function SubjectPage({ params, searchParams }) {
                   </span>
        
                   <div className="min-w-0 flex-1">
+                    onClick= {() => redirect("/notes") }
                     <p className="text-sm font-semibold">
                       {note.name}
                     </p>
-
+     
                     <p className="mt-1 text-xs text-muted-foreground">
                       {note.topic || name} · Grade {note.grade}
                     </p>
