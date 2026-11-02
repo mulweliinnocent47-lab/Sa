@@ -143,14 +143,14 @@ export default async function SubjectPage({ params, searchParams }) {
           ) : (
             <div className="grid gap-3 sm:grid-cols-2">
               {notes.map((note, index) => (
-                <Card
-                  key={`${note.folder}-${note.name}-${index}`}
                   <Link
-                  key={paper.id}
+                  key={note.folder}
                   href={notesHref}
                   className="block"
                 >
-                  onClick= {() => redirect("/notes") }
+                    <Card
+                  key={`${note.folder}-${note.name}-${index}`}
+                  
                   className="flex items-center gap-3 !p-4"
                 >
                   <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">
@@ -168,6 +168,7 @@ export default async function SubjectPage({ params, searchParams }) {
                     </p>
                   </div>
                 </Card>
+               </Link>
               ))}
             </div>
           )}
