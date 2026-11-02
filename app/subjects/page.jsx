@@ -31,27 +31,35 @@ const GRADES = [ "12"];
 const getServerSubject = cache(async () => {
   const allFiles = await GetSubject();
 
-  return allFiles.map((file) => {
-    const match = file.folder.match(/^grade-(\d+)-/);
+  const subjects = new Map();
 
+  allFiles.forEach((file) => {
+    const match = file.folder.match(/^grade-(\d+)-/);
     const grade = match?.[1];
 
-    const slug = file.folder
+    const name = file.folder
+      .split("/")[0]
       .replace(/^grade-\d+-/, "")
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-");
+      .trim();
 
-    return {
-      slug,
-      name: slug.split("/")[0].replace(/^grade-\d+-/, ""),
-      tone: "brand",
-      papers: allFiles.length,
-      notes: "30+",
-      grade,
-      progress: 0,
-    };
+    const slug = name.toLowerCase().replace(/\s+/g, "-");
+
+    const key = `${grade}-${slug}`;
+
+    if (!subjects.has(key)) {
+      subjects.set(key, {
+        slug,
+        name,
+        tone: "brand",
+        papers: 0,
+        notes: "30+",
+        grade,
+        progress: 0,
+      });
+    }
   });
+
+  return Array.from(subjects.values());
 });
 
 export default async function SubjectsPage({ searchParams }) {
