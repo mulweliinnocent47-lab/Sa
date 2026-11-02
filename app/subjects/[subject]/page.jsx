@@ -84,8 +84,7 @@ export default async function SubjectPage({ params, searchParams }) {
     `/notes`;
 
   const resourcesHref =
-    `/resources?subject=${encodeURIComponent(subject)}` +
-    `&grade=${encodeURIComponent(prop)}`;
+    `/notes?subject=${encodeURIComponent(subject)`;
 
   return (
     <AppShell>
