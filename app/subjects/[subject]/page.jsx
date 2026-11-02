@@ -237,7 +237,10 @@ export default async function SubjectPage({ params, searchParams }) {
                 );
 
                 return (
-                  <Link key={topic.name}>
+                  <Link key={topic.name}
+                      href={`/exam-centre)}`}
+                      className="block"
+                    >
                   <Card
                     
                     className="flex items-center gap-4 !p-4"
