@@ -237,8 +237,9 @@ export default async function SubjectPage({ params, searchParams }) {
                 );
 
                 return (
+                  <Link key={topic.name}>
                   <Card
-                    key={topic.name}
+                    
                     className="flex items-center gap-4 !p-4"
                   >
                     <span
@@ -272,6 +273,7 @@ export default async function SubjectPage({ params, searchParams }) {
                       </div>
                     </div>
                   </Card>
+                  </Link>
                 );
               })}
 
