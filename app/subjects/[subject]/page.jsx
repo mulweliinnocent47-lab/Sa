@@ -23,7 +23,7 @@ import {
 } from "@/components/ui";
 
 import { GetSubject } from "@/lib/subjectServer";
-import {GetPapers} from "@/lib/paperServer";
+import { GetPapers } from "@/lib/paperServer";
 import { Button2 } from "@/Client actions/buttonConfigSubject";
 
 export const metadata = { title: "Subject — SA Student" };
@@ -34,15 +34,6 @@ const STATS = {
   average: "2%",
 };
 
-// Keep your existing topic progress until you connect real topic data.
-const TOPICS2 = [
-  { name: "Algebra and equations", lessons: 8, done: 8 },
-  { name: "Functions and graphs", lessons: 10, done: 6 },
-  { name: "Trigonometry", lessons: 9, done: 3 },
-  { name: "Finance and growth", lessons: 6, done: 0 },
-  { name: "Probability", lessons: 7, done: 0 },
-];
-
 export default async function SubjectPage({ params, searchParams }) {
   const { subject } = await params;
   const { grade, tab } = await searchParams;
@@ -50,13 +41,30 @@ export default async function SubjectPage({ params, searchParams }) {
   const name = titleCase(subject);
   const prop = String(grade ?? "");
 
-  // Get every note matching this subject and grade.
+  // Get all notes matching this subject and grade.
   const notes = await getServerSubject(subject, grade);
+
+  // Build one topic per unique topic folder.
+  const TOPICS2 = Array.from(
+    new Map(
+      notes
+        .map((note) => String(note.topic ?? "").trim())
+        .filter(Boolean)
+        .map((topic) => [
+          topic.toLowerCase(),
+          {
+            name: topic,
+            lessons: 20,
+            done: 0,
+          },
+        ])
+    ).values()
+  );
 
   // Only the Overview uses the first three notes.
   const previewNotes = notes.slice(0, 3);
 
-  // Only fetch and filter papers when the Papers tab is selected.
+  // Only fetch papers when the Papers tab is selected.
   const requestedTab = String(tab ?? "Overview").toLowerCase();
 
   const activeTab = ["overview", "notes", "papers"].includes(requestedTab)
@@ -68,7 +76,6 @@ export default async function SubjectPage({ params, searchParams }) {
       ? await getServerPapers(subject, grade)
       : [];
 
-  // Keep the selected subject and grade when opening /papers.
   const papersHref =
     `/papers?subject=${encodeURIComponent(subject)}` +
     `&grade=${encodeURIComponent(prop)}`;
@@ -99,12 +106,14 @@ export default async function SubjectPage({ params, searchParams }) {
           label="Past papers"
           value={STATS.papers}
         />
+
         <Stat
           icon={BookOpen}
           label="Notes"
           value={STATS.notes}
           tone="success"
         />
+
         <Stat
           icon={Target}
           label="Your average"
@@ -143,8 +152,9 @@ export default async function SubjectPage({ params, searchParams }) {
                     <p className="text-sm font-semibold">
                       {note.name}
                     </p>
+
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Grade {note.grade}
+                      {note.topic || name} · Grade {note.grade}
                     </p>
                   </div>
                 </Card>
@@ -184,8 +194,7 @@ export default async function SubjectPage({ params, searchParams }) {
                       </p>
 
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {paper.year} · {paper.session} ·{" "}
-                        {paper.province}
+                        {paper.year} · {paper.session} · {paper.province}
                       </p>
 
                       <p className="mt-1 text-xs text-muted-foreground">
@@ -204,7 +213,7 @@ export default async function SubjectPage({ params, searchParams }) {
         </section>
       )}
 
-      {/* OVERVIEW TAB — shown by default */}
+      {/* OVERVIEW TAB */}
       {activeTab === "overview" && (
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
           <section className="lg:col-span-2">
@@ -237,7 +246,7 @@ export default async function SubjectPage({ params, searchParams }) {
 
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-semibold">
-                        {topic.name}
+                        {titleCase(topic.name)}
                       </p>
 
                       <p className="text-xs text-muted-foreground">
@@ -254,9 +263,17 @@ export default async function SubjectPage({ params, searchParams }) {
                   </Card>
                 );
               })}
+
+              {TOPICS2.length === 0 && (
+                <Card>
+                  <p className="text-sm text-muted-foreground">
+                    No topics found for {name}, Grade {prop}.
+                  </p>
+                </Card>
+              )}
             </div>
 
-            {/* First three notes appear on Overview only. */}
+            {/* Recent notes */}
             <div className="mt-6">
               <SectionTitle title="Recent notes" />
 
@@ -279,8 +296,9 @@ export default async function SubjectPage({ params, searchParams }) {
                         <p className="truncate text-sm font-semibold">
                           {note.name}
                         </p>
+
                         <p className="text-xs text-muted-foreground">
-                          Grade {note.grade}
+                          {note.topic || name} · Grade {note.grade}
                         </p>
                       </div>
                     </Card>
@@ -346,7 +364,8 @@ export default async function SubjectPage({ params, searchParams }) {
   );
 }
 
-// Return all notes matching the subject slug and grade.
+
+// Get notes matching the subject and grade.
 const getServerSubject = cache(async (slug, grade) => {
   if (!slug || grade == null) return [];
 
@@ -354,28 +373,62 @@ const getServerSubject = cache(async (slug, grade) => {
 
   if (!Array.isArray(allFiles)) return [];
 
+  const normalize = (value) =>
+    String(value ?? "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-");
+
   return allFiles
     .filter((file) => {
-      const folder = String(file.folder ?? "");
+      const folder = String(file?.folder ?? "");
+      const parentFolder = folder.split("/")[0] ?? "";
 
-      const fileSlug = folder.split("/")[0].replace(/^grade-\d+-/i, "").toLowerCase().replace(/\s+/g, "-");
+      const fileSlug = parentFolder.replace(
+        /^grade-\d+-/i,
+        ""
+      );
 
-      const fileGrade = folder.match(/^grade-(\d+)-/i)?.[1];
+      const fileGrade = parentFolder.match(
+        /^grade-(\d+)-/i
+      )?.[1];
 
       return (
-        fileSlug === String(slug).toLowerCase() &&
+        normalize(fileSlug) === normalize(slug) &&
         fileGrade === String(grade)
       );
     })
-    .map((file) => ({
-      ...file,
-      slug: String(file.folder ?? "").split("/")[0].replace(/^grade-\d+-/i, "").toLowerCase().replace(/\s+/g, "-"),
-      name: String(file.name ?? "Untitled").replace(/\.txt$/i, ""),
-      grade: String(file.folder ?? "").match(/^grade-(\d+)-/i)?.[1],
-    }));
+    .map((file) => {
+      const folder = String(file?.folder ?? "");
+      const folderParts = folder.split("/");
+
+      // This is the folder immediately after Mathematics.
+      const topic = folderParts[1]?.trim() ?? "";
+
+      const parentFolder = folderParts[0] ?? "";
+
+      const fileSlug = parentFolder
+        .replace(/^grade-\d+-/i, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+
+      const fileGrade = parentFolder.match(
+        /^grade-(\d+)-/i
+      )?.[1];
+
+      return {
+        ...file,
+        topic,
+        slug: fileSlug,
+        name: String(file?.name ?? "Untitled").replace(/\.txt$/i, ""),
+        grade: fileGrade,
+      };
+    });
 });
 
-// Get papers only for the requested subject and grade.
+
+// Get papers matching the subject and grade.
 const getServerPapers = cache(async (slug, grade) => {
   if (!slug || grade == null) return [];
 
