@@ -84,7 +84,7 @@ export default async function SubjectPage({ params, searchParams }) {
     `/notes`;
 
   const resourcesHref =
-    `/notes?subject=${encodeURIComponent(subject)`;
+    `/notes?subject=${encodeURIComponent(subject)}`;
 
   return (
     <AppShell>
@@ -237,7 +237,7 @@ export default async function SubjectPage({ params, searchParams }) {
 
                 return (
                   <Link key={topic.name}
-                      href={`/exam-centre?${topic.name}`}
+                      href={`/exam-centre?topic=${topic.name}`}
                       className="block"
                     >
                   <Card
