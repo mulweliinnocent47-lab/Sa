@@ -44,12 +44,10 @@ const getServerSubject = cache(async () => {
 
     return {
       slug,
-      name: slug
-        .replace(/-/g, " ")
-        .toUpperCase(),
+      name: slug.split("/")[0].replace(/^grade-\d+-/, ""),
       tone: "brand",
       papers: allFiles.length,
-      notes: "20+",
+      notes: "30+",
       grade,
       progress: 0,
     };
