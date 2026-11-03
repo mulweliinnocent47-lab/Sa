@@ -4,9 +4,9 @@ import { createContext, useContext } from "react";
 
 const NoteContext = createContext(null);
 
-export function NoteProvider({ NOTES, PAPERS, isLoggedIn = false, children }) {
+export function NoteProvider({ NOTES, PAPERS, MEMOS, isLoggedIn = false, children }) {
   return (
-    <NoteContext.Provider value={{ NOTES, PAPERS, isLoggedIn }}>
+    <NoteContext.Provider value={{ NOTES, PAPERS, MEMOS, isLoggedIn }}>
       {children}
     </NoteContext.Provider>
   );
