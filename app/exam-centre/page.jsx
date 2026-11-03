@@ -167,9 +167,9 @@ const TIMETABLE = [
 
 const LEVEL_TONE = { Mixed: "brand", Hard: "danger", Medium: "gold" };
 
-export default function ExamCentrePage() {
+export default async function ExamCentrePage() {
   const List = SESSIONS
- async function handle(){
+ 
       const res = await fetch("/api/plannerFetch");
       const data = await res.json();
       const body = data.map((e) => ({
@@ -181,7 +181,7 @@ export default function ExamCentrePage() {
         level:e.level
       })
      List.unshift(body) 
-  }
+  
   
     return (
     <AppShell>
