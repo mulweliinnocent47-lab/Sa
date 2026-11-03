@@ -5,7 +5,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AlertTriangle, CheckCircle2, ChevronLeft, ChevronRight, Flag, Loader2, RotateCcw, Timer, XCircle } from "lucide-react";
 import { Badge, Card, PageHeader, ProgressBar } from "@/components/ui";
-import { getSession } from "@/lib/practice-sessions";
 
 const btnPrimary =
   "inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-50";
@@ -37,8 +36,7 @@ function formatTime(ms) {
   return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
 }
 
-export function PracticeSession({ id }) {
-  const session = getSession(id);
+export function PracticeSession({ id, session }) {
   const storageKey = `practice:${id}`;
 
   const [phase, setPhase] = useState("loading"); // loading | error | quiz | result
@@ -85,6 +83,7 @@ export function PracticeSession({ id }) {
             subject: session.subject,
             minutes: session.minutes,
             level: session.level,
+            topic: session.topic || undefined, // planned sessions focus on one topic
           }),
         });
         const json = await res.json().catch(() => null);
