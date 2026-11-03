@@ -2,7 +2,7 @@ import { CalendarDays, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { PlannerForm } from "@/components/PlannerForm";
 import { Badge, Card, PageHeader, SectionTitle } from "@/components/ui";
-import Calendar from "@/components/calendar;
+import Calendar from "@/components/calendar";
 
 export const metadata = { title: "Planner — SA Student" };
 
