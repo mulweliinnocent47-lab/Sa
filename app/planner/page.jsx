@@ -1,6 +1,7 @@
-import { CalendarDays, Check, ChevronLeft, ChevronRight, Plus } from "lucide-react";
+import { CalendarDays, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { Badge, Card, GhostButton, PageHeader, PrimaryButton, SectionTitle } from "@/components/ui";
+import { PlannerForm } from "@/components/PlannerForm";
+import { Badge, Card, PageHeader, SectionTitle } from "@/components/ui";
 
 export const metadata = { title: "Planner — SA Student" };
 
@@ -24,8 +25,10 @@ const DOT = { brand: "bg-primary", success: "bg-success", gold: "bg-gold" };
 export default function PlannerPage() {
   return (
     <AppShell>
-      <PageHeader title="Planner" subtitle="Plan your week and tick sessions off as you go."
-        action={<PrimaryButton icon={Plus}>Add session</PrimaryButton>} />
+      <PageHeader title="Planner" subtitle="Plan your week and tick sessions off as you go." />
+
+      {/* NEW: add-session form + 3 random suggestions */}
+      <PlannerForm />
 
       <div className="grid gap-6 lg:grid-cols-3">
         <section className="lg:col-span-2">
