@@ -163,9 +163,64 @@ const TIMETABLE = [
   { date: "26 Nov", day: "Thu", subject: "Information Technology — Paper 1 Rewrite Practical", time: "09:00", length: "3 hrs" },
 ];
 const SESSIONS = [
+  // MATHEMATICS
   { id: "maths-quick-10", title: "Mathematics quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
-  { id: "physics-mock-1", title: "Physical Sciences mock exam", kind: "Full paper", minutes: 180, level: "Hard" },
+  { id: "maths-mock-1", title: "Mathematics mock exam — Paper 1", kind: "Full paper", minutes: 180, level: "Hard" },
+  { id: "maths-mock-2", title: "Mathematics mock exam — Paper 2", kind: "Full paper", minutes: 180, level: "Hard" },
+
+  // MATHEMATICAL LITERACY
+  { id: "math-lit-quick", title: "Mathematical Literacy quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "math-lit-mock-1", title: "Mathematical Literacy mock exam — Paper 1", kind: "Full paper", minutes: 180, level: "Hard" },
+  { id: "math-lit-mock-2", title: "Mathematical Literacy mock exam — Paper 2", kind: "Full paper", minutes: 180, level: "Hard" },
+
+  // PHYSICAL SCIENCES
+  { id: "physics-quick", title: "Physical Sciences: Physics quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "physics-mock-1", title: "Physical Sciences mock exam — Paper 1", kind: "Full paper", minutes: 180, level: "Hard" },
+  { id: "chemistry-mock-2", title: "Physical Sciences mock exam — Paper 2", kind: "Full paper", minutes: 180, level: "Hard" },
+
+  // LIFE SCIENCES
   { id: "lifesci-topic-test", title: "Life Sciences topic test", kind: "20 questions", minutes: 30, level: "Medium" },
+  { id: "lifesci-mock-1", title: "Life Sciences mock exam — Paper 1", kind: "Full paper", minutes: 150, level: "Hard" },
+  { id: "lifesci-mock-2", title: "Life Sciences mock exam — Paper 2", kind: "Full paper", minutes: 150, level: "Hard" },
+
+  // ACCOUNTING
+  { id: "accounting-quick", title: "Accounting quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "accounting-mock-1", title: "Accounting mock exam — Paper 1", kind: "Full paper", minutes: 120, level: "Hard" },
+  { id: "accounting-mock-2", title: "Accounting mock exam — Paper 2", kind: "Full paper", minutes: 120, level: "Hard" },
+
+  // BUSINESS STUDIES
+  { id: "business-quick", title: "Business Studies quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "business-mock-1", title: "Business Studies mock exam — Paper 1", kind: "Full paper", minutes: 120, level: "Hard" },
+  { id: "business-mock-2", title: "Business Studies mock exam — Paper 2", kind: "Full paper", minutes: 120, level: "Hard" },
+
+  // GEOGRAPHY
+  { id: "geography-quick", title: "Geography quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "geography-mock-1", title: "Geography mock exam — Paper 1", kind: "Full paper", minutes: 180, level: "Hard" },
+  { id: "geography-mock-2", title: "Geography mock exam — Paper 2", kind: "Full paper", minutes: 180, level: "Hard" },
+
+  // HISTORY
+  { id: "history-quick", title: "History quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "history-mock-1", title: "History mock exam — Paper 1", kind: "Full paper", minutes: 180, level: "Hard" },
+  { id: "history-mock-2", title: "History mock exam — Paper 2", kind: "Full paper", minutes: 180, level: "Hard" },
+
+  // ECONOMICS
+  { id: "economics-quick", title: "Economics quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "economics-mock-1", title: "Economics mock exam — Paper 1", kind: "Full paper", minutes: 120, level: "Hard" },
+  { id: "economics-mock-2", title: "Economics mock exam — Paper 2", kind: "Full paper", minutes: 120, level: "Hard" },
+
+  // ENGLISH
+  { id: "english-quick", title: "English HL quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "english-mock-1", title: "English HL mock exam — Paper 1", kind: "Full paper", minutes: 120, level: "Hard" },
+  { id: "english-mock-2", title: "English HL mock exam — Paper 2", kind: "Full paper", minutes: 150, level: "Hard" },
+  { id: "english-mock-3", title: "English HL mock exam — Paper 3", kind: "Full paper", minutes: 180, level: "Hard" },
+
+  // HISTORY AND OTHER POPULAR SUBJECTS
+  { id: "tourism-quick", title: "Tourism quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "tourism-mock", title: "Tourism mock exam", kind: "Full paper", minutes: 180, level: "Hard" },
+
+  { id: "agri-quick", title: "Agricultural Sciences quick-fire", kind: "10 questions", minutes: 15, level: "Mixed" },
+  { id: "agri-mock-1", title: "Agricultural Sciences mock exam — Paper 1", kind: "Full paper", minutes: 150, level: "Hard" },
+  { id: "agri-mock-2", title: "Agricultural Sciences mock exam — Paper 2", kind: "Full paper", minutes: 150, level: "Hard" },
 ];
 const LEVEL_TONE = { Mixed: "brand", Hard: "danger", Medium: "gold" };
 
