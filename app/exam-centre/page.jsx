@@ -248,6 +248,4 @@ export default function ExamCentrePage() {
   );
 }
       
-    </AppShell>
-  );
-}
+    
