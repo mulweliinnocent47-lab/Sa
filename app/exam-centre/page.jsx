@@ -9,7 +9,7 @@ export const metadata = { title: "Exam Centre — SA Student" };
 
 // ── PLACEHOLDER DATA ── exam dates + practice sessions
 const COUNTDOWN = { days: 10, label: "until your first exam" };
-const TIMETABLE = [
+const TABLE = [
   // WEEK 1
   { date: "13 Oct", day: "Tue", subject: "Computer Applications Technology — Paper 1 Practical", time: "09:00", length: "3 hrs" },
   { date: "13 Oct", day: "Tue", subject: "Hindi, Gujarati, Tamil, Telugu, Urdu HL — Paper 1", time: "14:00", length: "2 hrs" },
@@ -168,7 +168,13 @@ const TIMETABLE = [
 const LEVEL_TONE = { Mixed: "brand", Hard: "danger", Medium: "gold" };
 
 export default function ExamCentrePage() {
-  return (
+ async function handle(){
+      const res = await fetch("/api/plannerFetch");
+      const data = await res.json();
+      TABLE.unshift(data)
+  }
+  const TIMETABLE = TABLE
+    return (
     <AppShell>
       <PageHeader title="Exam Centre" subtitle="Know when your exams are and practise under real conditions." />
 
