@@ -2,6 +2,7 @@ import { CalendarDays, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { PlannerForm } from "@/components/PlannerForm";
 import { Badge, Card, PageHeader, SectionTitle } from "@/components/ui";
+import Calendar from "@/components/calendar;
 
 export const metadata = { title: "Planner — SA Student" };
 
@@ -32,36 +33,7 @@ export default function PlannerPage() {
       <PlannerForm />
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <section className="lg:col-span-2">
-          <div className="mb-3 flex items-center justify-between">
-            <p className="flex items-center gap-2 text-sm font-semibold"><CalendarDays className="size-4 text-primary" /> 5 – 11 October</p>
-            <div className="flex gap-1">
-              <button type="button" aria-label="Previous week" className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted"><ChevronLeft className="size-4" /></button>
-              <button type="button" aria-label="Next week" className="grid size-9 place-items-center rounded-lg border border-border hover:bg-muted"><ChevronRight className="size-4" /></button>
-            </div>
-          </div>
-
-          {/* Mobile: list · Desktop: 7-column grid */}
-          <div className="grid gap-3 md:grid-cols-7">
-            {WEEK.map((d) => (
-              <Card key={d.day} className={`!p-3 md:min-h-40 ${d.today ? "!border-primary ring-2 ring-primary/20" : ""}`}>
-                <div className="flex items-baseline justify-between md:block">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{d.day}</p>
-                  <p className={`text-lg font-bold ${d.today ? "text-primary" : ""}`}>{d.date}</p>
-                </div>
-                <div className="mt-2 space-y-1.5">
-                  {d.sessions.length === 0 && <p className="text-xs text-muted-foreground">Free</p>}
-                  {d.sessions.map((s) => (
-                    <div key={s.t} className="rounded-lg bg-muted p-2">
-                      <p className="flex items-center gap-1.5 text-xs font-semibold"><span className={`size-1.5 rounded-full ${DOT[s.tone]}`} /> <span className="truncate">{s.t}</span></p>
-                      <p className="mt-0.5 text-[11px] text-muted-foreground">{s.time}</p>
-                    </div>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
+        <Calendar />
 
         <aside>
           <SectionTitle title="Today" />
