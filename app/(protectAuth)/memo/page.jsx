@@ -25,30 +25,27 @@ export default function MemosPage() {
 
   // Get unique subjects from the actual memo data.
   const subjects = useMemo(
-    () => [
-      "All",
-      ...new Set(
-        MEMOS.map((m) => m.subject).filter(Boolean)
-      ),
-    ],
-    [MEMOS]
-  );
-
+  () => [
+    "All",
+    ...new Set(MEMOS.map((m) => m.subject).filter(Boolean)),
+  ],
+  [MEMOS]
+);
   // Search and filter memos.
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
+  const q = query.trim().toLowerCase();
 
-    return MEMOS.filter((m) => {
-      const text =
-        `${m.title} ${m.subject} grade ${m.grade} ${m.year} ${m.session}`
-          .toLowerCase();
+  return MEMOS.filter((m) => {
+    const text =
+      `${m.title} ${m.subject} grade ${m.grade} ${m.year} ${m.session}`
+        .toLowerCase();
 
-      return (
-        (subject === "All" || m.subject === subject) &&
-        (!q || text.includes(q))
-      );
-    });
-  }, [MEMOS, query, subject]);
+    return (
+      (subject === "All" || m.subject === subject) &&
+      (!q || text.includes(q))
+    );
+  });
+}, [MEMOS, query, subject]);
 
   return (
     <AppShell>
