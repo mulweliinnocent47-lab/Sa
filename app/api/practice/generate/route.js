@@ -25,7 +25,8 @@ export async function POST(request) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return Response.json({ error: "Not signed in" }, { status: 401 });
 
-  const { data, error } = await supabase.functions.invoke("PROAI-PROCTICE", {
+  //https://fmcbyqwmzcglmaqmksbz.supabase.co/functions/v1/
+  const { data, error } = await supabase.functions.invoke("exam-centre-egde", {
     body: {
       id,
       title,
