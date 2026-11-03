@@ -237,15 +237,17 @@ export default function ExamCentrePage() {
         <p className="mt-1 text-sm text-primary-foreground/85">{COUNTDOWN.label}</p>
       </section>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
         <Stat icon={Trophy} label="Best score" value="82%" tone="gold" />
         <Stat icon={PlayCircle} label="Sessions done" value="14" />
         <Stat icon={Timer} label="Time practised" value="9h 20m" tone="success" />
       </div>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-2">
-        <ExamCentreLists timetable={TIMETABLE} sessions={SESSIONS} />
-      </div>
+      <ExamCentreLists timetable={TIMETABLE} sessions={SESSIONS} />
+    </AppShell>
+  );
+}
+      
     </AppShell>
   );
 }
