@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CalendarDays, Clock, PlayCircle, Timer, Trophy } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Badge, Card, PageHeader, PrimaryButton, SectionTitle, Stat } from "@/components/ui";
-
+import { ExamCentreLists } from "@/components/ExamCentreLists";
 export const metadata = { title: "Exam Centre — SA Student" };
 
 // ── PLACEHOLDER DATA ── exam dates + practice sessions
@@ -244,41 +244,7 @@ export default function ExamCentrePage() {
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-2">
-        <section>
-          <SectionTitle title="Exam timetable" />
-          <div className="space-y-3">
-            {TIMETABLE.map((e) => (
-              <Card key={e.date} className="flex items-center gap-4 !p-4">
-                <div className="w-14 shrink-0 rounded-xl bg-brand-soft py-2 text-center text-primary">
-                  <p className="text-[11px] font-semibold uppercase">{e.day}</p>
-                  <p className="text-sm font-bold">{e.date}</p>
-                </div>
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{e.subject}</p>
-                  <p className="flex items-center gap-1 text-xs text-muted-foreground"><Clock className="size-3" /> {e.time} · {e.length}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <SectionTitle title="Practice sessions" />
-          <div className="space-y-3">
-            {SESSIONS.map((s) => (
-              <Card key={s.id} className="!p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="font-semibold">{s.title}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{s.kind} · {s.minutes} min</p>
-                  </div>
-                  <Badge tone={LEVEL_TONE[s.level]}>{s.level}</Badge>
-                </div>
-                <PrimaryButton href={`/practice/${s.id}`} icon={PlayCircle} className="mt-4 w-full">Start session</PrimaryButton>
-              </Card>
-            ))}
-          </div>
-        </section>
+        <ExamCentreLists timetable={TIMETABLE} sessions={SESSIONS} />
       </div>
     </AppShell>
   );
