@@ -120,7 +120,7 @@ export default function MemosPage() {
               </button>
             ) : (
               <DownloadButton
-                href={`/api/download?path=${encodeURIComponent(m.path)}&filename=${encodeURIComponent(`${m.subject} ${m.title} ${m.year}.pdf`)}`}
+                href={`/api/memo?path=${encodeURIComponent(m.path)}&filename=${encodeURIComponent(`${m.subject} ${m.title} ${m.year}.pdf`)}`}
                 className="mt-auto inline-flex h-9 w-full items-center justify-center gap-2 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground hover:opacity-90"
               />
             )}
