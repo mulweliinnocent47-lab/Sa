@@ -166,8 +166,8 @@ export function PlannerForm() {
           </div>
 
           <div>
-            <label htmlFor="time" className="mb-1.5 block text-xs font-medium text-muted-foreground">Time</label>
-            <input id="time" type="time" value={time} onChange={(e) => setTime(e.target.value)} className={field} />
+            <label htmlFor="time" className="mb-1.5 block text-xs font-medium text-muted-foreground">Time in Minutes</label>
+            <input id="time" type="number" value={time} onChange={(e) => setTime(e.target.value)} className={field} />
           </div>
 
           <div className="flex items-end">
