@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CalendarDays, Clock, PlayCircle, Timer, Trophy } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Badge, Card, PageHeader, PrimaryButton, SectionTitle, Stat } from "@/components/ui";
-import { ExamCentreLists } from "@/components/ExamCentreLists";
+import { ExamCentreLists } from "@/components/ExamCentreList";
 export const metadata = { title: "Exam Centre — SA Student" };
 
 // ── PLACEHOLDER DATA ── exam dates + practice sessions
