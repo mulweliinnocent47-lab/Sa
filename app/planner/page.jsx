@@ -26,6 +26,7 @@ export default function PlannerPage() {
   return (
     <AppShell>
       <PageHeader title="Planner" subtitle="Plan your week and tick sessions off as you go." />
+      <PageHeader title="Planner" subtitle="You'll find every session on the exam centre page" />
 
       {/* NEW: add-session form + 3 random suggestions */}
       <PlannerForm />
