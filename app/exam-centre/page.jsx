@@ -4,6 +4,8 @@ import { AppShell } from "@/components/AppShell";
 import { Badge, Card, PageHeader, PrimaryButton, SectionTitle, Stat } from "@/components/ui";
 import { ExamCentreLists } from "@/components/ExamCentreLists";
 import { SESSIONS } from "@/lib/practice-sessions"
+import Handle from "@/lib/plannerAPIFecth"
+import Loading from "@/components/loading"
 
 export const metadata = { title: "Exam Centre — SA Student" };
 
@@ -169,8 +171,11 @@ const LEVEL_TONE = { Mixed: "brand", Hard: "danger", Medium: "gold" };
 
 export default async function ExamCentrePage() {
   const List = SESSIONS
-  
-  
+  const data = await Handle()
+   if(!data){
+   return(<Loading />)
+   }
+  List.unshift(data)
     return (
     <AppShell>
       <PageHeader title="Exam Centre" subtitle="Know when your exams are and practise under real conditions." />
