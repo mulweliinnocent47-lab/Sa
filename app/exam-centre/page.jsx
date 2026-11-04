@@ -4,7 +4,7 @@ import { AppShell } from "@/components/AppShell";
 import { Badge, Card, PageHeader, PrimaryButton, SectionTitle, Stat } from "@/components/ui";
 import { ExamCentreLists } from "@/components/ExamCentreLists";
 import { SESSIONS } from "@/lib/practice-sessions"
-import Handle from "@/lib/plannerAPIFecth"
+import Handle from "@/lib/plannerAPIFetch.js"
 import Loading from "@/components/Loading"
 
 export const metadata = { title: "Exam Centre — SA Student" };
