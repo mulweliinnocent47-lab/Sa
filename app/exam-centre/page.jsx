@@ -191,7 +191,7 @@ export default async function ExamCentrePage() {
         <Stat icon={Timer} label="Time practised" value="9h 20m" tone="success" />
       </div>
 
-      <ExamCentreLists timetable={TIMETABLE} sessions={List} />
+      <ExamCentreLists timetable={TIMETABLE} sessions={sessions} />
     </AppShell>
   );
 }
