@@ -4,10 +4,11 @@ import { AppShell } from "@/components/AppShell";
 import { Badge, Card, PageHeader, PrimaryButton, SectionTitle, Stat } from "@/components/ui";
 import { ExamCentreLists } from "@/components/ExamCentreLists";
 import { SESSIONS } from "@/lib/practice-sessions"
-import Handle from "@/lib/plannerAPIFetch.js"
+import {getPlannedSessions} from "@/lib/plannerAPIFetch.js"
 import Loading from "@/components/Loading"
 
 export const metadata = { title: "Exam Centre — SA Student" };
+export const dynamic = "force-dynamic";
 
 // ── PLACEHOLDER DATA ── exam dates + practice sessions
 const COUNTDOWN = { days: 10, label: "until your first exam" };
@@ -171,7 +172,7 @@ const LEVEL_TONE = { Mixed: "brand", Hard: "danger", Medium: "gold" };
 
 export default async function ExamCentrePage() {
   const List = SESSIONS
-  const data = await Handle()
+  const data = await getPlannedSessions()
    if(!data){
    return(<Loading />)
    }
