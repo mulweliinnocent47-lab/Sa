@@ -5,7 +5,7 @@ import { Badge, Card, PageHeader, PrimaryButton, SectionTitle, Stat } from "@/co
 import { ExamCentreLists } from "@/components/ExamCentreLists";
 import { SESSIONS } from "@/lib/practice-sessions"
 import Handle from "@/lib/plannerAPIFecth"
-import Loading from "@/components/loading"
+import Loading from "@/components/Loading"
 
 export const metadata = { title: "Exam Centre — SA Student" };
 
