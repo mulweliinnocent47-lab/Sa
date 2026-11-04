@@ -171,12 +171,8 @@ const TIMETABLE = [
 const LEVEL_TONE = { Mixed: "brand", Hard: "danger", Medium: "gold" };
 
 export default async function ExamCentrePage() {
-  const List = SESSIONS
-  const data = await getPlannedSessions()
-   if(!data){
-   return(<Loading />)
-   }
-  List.unshift(data)
+  const planned = await getPlannedSessions();
+  const sessions = [...planned, ...SESSIONS];
     return (
     <AppShell>
       <PageHeader title="Exam Centre" subtitle="Know when your exams are and practise under real conditions." />
