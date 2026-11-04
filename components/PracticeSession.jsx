@@ -37,8 +37,8 @@ function formatTime(ms) {
   return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
 }
 
-export function PracticeSession({ id }) {
-  const session = getSession(id);
+export function PracticeSession({ id, session })  {
+  
   const storageKey = `practice:${id}`;
 
   const [phase, setPhase] = useState("loading"); // loading | error | quiz | result
